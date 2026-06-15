@@ -1,0 +1,128 @@
+Identifier;Title;Description;Modified;ReleaseDate;ModificationDate;Language;TemporalCoverage;Authority;Catalog;Publisher;ContactPoint;Version;VersionNotes;VersionReason;Frequency;Status;ObservationCount;ObservationsModified;DatasetType;GraphTypes;License;Source;Summary;LongDescription
+85036NED;"Gemiddelde WOZ-waarde van woningen; eigendom, regio ";"In deze tabel wordt de gemiddelde WOZ-waarde van woningen per 1 januari gepubliceerd. De cijfers zijn uitgesplitst naar het eigendom van de woning (uitgezonderd woningen waarvan het eigendom onbekend is) en naar regionale indeling.
+Onder de regionale indeling is een uitsplitsing gemaakt naar Nederland totaal, landsdeel, provincie, COROP-gebied en gemeente.
+Voor gemeenten waar een gemeentelijke herindeling heeft plaatsgevonden zijn de cijfers tussen de jaren niet goed vergelijkbaar. 
+
+Populatie:
+De populatie is de woningvoorraad volgens de BAG op 1 januari, zoals vastgesteld door het CBS. 
+
+Gegevens beschikbaar vanaf: 2019
+
+Status van de cijfers:
+De cijfers met de totale gemiddelde WOZ-waarde van 2019, 2020 en 2021 zijn definitief en op basis van het LVWOZ-extract van oktober 2022.
+De cijfers met de totale gemiddelde WOZ-waarde van 2022 zijn definitief en op basis van het LVWOZ-extract van oktober 2023.
+De cijfers met de totale gemiddelde WOZ-waarde van 2023 zijn definitief en op basis van het LVWOZ-extract van oktober 2024.
+De cijfers met de totale gemiddelde WOZ-waarde van 2024 en 2025 zijn definitief en op basis van het LVWOZ-extract van oktober 2025.
+
+Wijzigingen per 29 oktober 2025:
+De definitieve cijfers van 2024 en 2025 zijn toegevoegd. Het jaar 2025 bevat voor het eerst eigendomsuitsplitsingen.
+
+Wanneer komen er nieuwe cijfers?
+In juni 2026 verschijnen de voorlopige cijfers van 2026. Deze zijn dan nog zonder de eigendomsuitsplitsingen. Die zullen pas in november 2026 verschijnen.
+
+
+";2025-10-29T00:00:00+01:00;2025-10-29T00:00:00+01:00;2025-10-29T00:00:00+01:00;nl;2019 - 2025;https://standaarden.overheid.nl/owms/terms/Centraal_Bureau_voor_de_Statistiek;CBS;https://standaarden.overheid.nl/owms/terms/Centraal_Bureau_voor_de_Statistiek;infoservice@cbs.nl;202510290000;;Actualisering;Per jaar;Regulier;11523;2025-10-29T00:00:00+01:00;Numeric;Table,Bar,Line,Map;https://creativecommons.org/licenses/by/4.0/;CBS.;"Gemiddelde WOZ-waarde van woningen
+verblijfsobjecten met een woonfunctie, eigendom, regio";"INHOUDSOPGAVE
+
+1. Toelichting
+2. Definities en verklaring van symbolen
+3. Koppelingen naar relevante tabellen en artikelen
+4. Bronnen en methoden
+5. Meer informatie 
+
+
+1. TOELICHTING
+
+In deze tabel wordt de gemiddelde WOZ-waarde van woningen per 1 januari gepubliceerd. De cijfers zijn uitgesplitst naar het eigendom van de woning (uitgezonderd woningen waarvan het eigendom onbekend is) en naar regionale indeling.
+Onder de regionale indeling is een uitsplitsing gemaakt naar Nederland totaal, landsdeel, provincie, COROP-gebied en gemeente.
+Voor gemeenten waar een gemeentelijke herindeling heeft plaatsgevonden zijn de cijfers tussen de jaren niet goed vergelijkbaar. 
+
+Populatie:
+De populatie is de woningvoorraad volgens de BAG op 1 januari, zoals vastgesteld door het CBS. 
+
+Gegevens beschikbaar vanaf: 2019
+
+Status van de cijfers:
+De cijfers met de totale gemiddelde WOZ-waarde van 2019, 2020 en 2021 zijn definitief en op basis van het LVWOZ-extract van oktober 2022.
+De cijfers met de totale gemiddelde WOZ-waarde van 2022 zijn definitief en op basis van het LVWOZ-extract van oktober 2023.
+De cijfers met de totale gemiddelde WOZ-waarde van 2023 zijn definitief en op basis van het LVWOZ-extract van oktober 2024.
+De cijfers met de totale gemiddelde WOZ-waarde van 2024 en 2025 zijn definitief en op basis van het LVWOZ-extract van oktober 2025.
+
+Wijzigingen per 29 oktober 2025:
+De definitieve cijfers van 2024 en 2025 zijn toegevoegd. Het jaar 2025 bevat voor het eerst eigendomsuitsplitsingen.
+
+Wanneer komen er nieuwe cijfers?
+In juni 2026 verschijnen de voorlopige cijfers van 2026. Deze zijn dan nog zonder de eigendomsuitsplitsingen. Die zullen pas in november 2026 verschijnen.
+
+
+2. DEFINITIES EN VERKLARING VAN SYMBOLEN
+
+Definities:
+
+Woning
+Verblijfsobject met minimaal een woonfunctie en eventueel één of meer andere gebruiksfuncties.
+Bij eigen woningen is de eigenaar tevens de bewoner. Bij huurwoningen is er iemand anders eigenaar dan de bewoner.
+
+WOZ-waarde
+De WOZ-waarde van een jaar is de waarde die een gemeente aan eigenaren en gebruikers van objecten begin van het jaar verschaft. Omdat de gemeente tijd nodig heeft voor taxatie van deze objecten, wordt de waardepeildatum van het voorgaande jaar genomen. De waardepeildatum (taxatiepeildatum) is steeds 1 jaar eerder (t-1). Ter voorbeeld, de WOZ-waarde op 1 januari 2022 is de feitelijke waarde van het object op 1 januari 2021.
+
+Gemiddelde WOZ-waarde
+De gemiddelde WOZ-waarde in deze tabel is de gemiddelde WOZ-waarde van alle verblijfsobjecten met een woonfunctie. Woningen die een waarde hebben van minder dan 10 duizend euro of meer dan 5 miljoen euro niet meegenomen in het bepalen van het gemiddelde.
+
+Geheimhouding
+Indien in de regio voor minder dan 85 procent van alle woningen een WOZ-waarde bekend is dan wordt het gemiddelde van die regio niet bepaald. 
+
+Verklaring van symbolen:
+niets (blanco)	: het cijfer kan op logische gronden niet voorkomen
+. 		: het cijfer is onbekend, onvoldoende betrouwbaar of geheim
+*		: voorlopige cijfers
+**		: nader voorlopige cijfers
+
+
+3. KOPPELINGEN NAAR RELEVANTE TABELLEN EN ARTIKELEN
+
+De belastingcapaciteit van WOZ-objecten woningen en niet-woningen is te vinden in de tabel: <a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/60039FVW'>Maatstaven Financiële verhoudingswet</a> bij het onderwerp 'Vastgoed'.
+Gegevens over de woningvoorraad en - mutaties vanaf 2012 zijn te vinden in de tabel: <a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/81955NED/table?dl=58421'>Voorraad woningen en niet-woningen</a>.
+Meer gegevens over waarde van woningen zijn te vinden op themapagina: <a href='https://www.cbs.nl/nl-nl/economie/bouwen-en-wonen'>Bouwen en wonen</a>.
+Voormalige tabel met gemiddelde WOZ-waarde op basis van de WOZ-populatie: <a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/37610/table?dl=40504'>Waarde onroerende zaken van woningen en niet-woningen</a>.
+Gegevens over het eigendom van de woningvoorraad is te vinden onder : <a href='https://opendata.cbs.nl/statline/#/CBS/nl/dataset/82900NED/table?fromstatweb'>eigendom</a>.
+
+
+4. BRONNEN EN METHODEN
+
+Landelijke Voorziening WOZ
+Het CBS heeft toegang tot de Landelijke Voorziening WOZ (LV WOZ). Dit is de centrale voorziening waaruit WOZ-gegevens uit alle gemeenten verkregen kunnen worden. Sinds 1 januari 2019 zijn daadwerkelijk alle gemeenten aangesloten op de LV WOZ. Hiermee werd de LV WOZ voor alle gebruikers en afnemers de basis. De basisregistratie bevat een 'Vastgestelde waarde' (WOZ-waarde) en de koppeling aan kadastrale percelen en/of adressen en aan BAG verblijfsobjecten, standplaatsen, ligplaatsen en/of panden. De LV WOZ maakt (her)gebruik van de standaarden en voorzieningen die binnen het Stelsel van Basisregistraties ontwikkeld zijn.
+De gemeenten zijn verantwoordelijk voor de kwaliteit van de vulling van de LV WOZ. De Waarderingskamer is de toezichthouder. Het Kadaster beheert de LV WOZ. Het Ministerie van Financiën is verantwoordelijk voor de basisregistratie LV WOZ.
+
+Basisregistratie Adressen en Gebouwen (BAG) 
+De Basisregistraties Adressen en Gebouwen (BAG) is een registratie waarin gemeentelijke basisgegevens over alle gebouwen en adressen in Nederland zijn verzameld. De BAG bestaat uit twee samenhangende basisregistraties: de Basisregistratie Adressen en de Basisregistratie Gebouwen. De Basisregistratie Adressen bevat alle officiële, als zodanig toegekende, adressen op Nederlands grondgebied. Een adres is de door de bevoegde gemeente toegekende benaming, bestaande uit de naam van een openbare ruimte (straat), een nummeraanduiding (huisnummer en toevoegingen) en woonplaats. Adressen worden toegekend aan adresseerbare objecten uit de Basisregistratie Gebouwen. In de Basisregistratie Gebouwen zijn alle panden, verblijfsobjecten, standplaatsen en ligplaatsen geregistreerd. Deze 'objecttypen' zijn afgebakend en voorzien van een unieke aanduiding. Bepaalde gegevens behorende bij de objecttypen (zoals de oppervlakte en het bouwjaar) zijn ook in de registratie opgenomen. Aan ieder object is minimaal één adres gekoppeld. Daarnaast zijn nevenadressen mogelijk. Aan panden zonder verblijfsobject (zoals onzelfstandige bijgebouwen) wordt geen adres toegekend. 
+De gemeenten zijn verantwoordelijk voor de kwaliteit van de vulling van de BAG. Het Kadaster beheert de BAG en krijgt de gegevens aangeleverd door de gemeenten.
+
+Basisregistratie Kadaster (BRK)
+Het eigendom van woningen wordt voor het belangrijkste deel bepaald door de eigenaren in de basisregistratie Kadaster, aangevuld met de eigenaren uit de LV WOZ.
+
+Autoriteit Woningcorporaties
+De Corporatiewoningen worden vastgesteld aan de hand van een bestand van de Autoriteit Woningcorporaties en aangevuld met de Basisregistratie Kadaster (BRK).
+
+Koppeling BAG-WOZ
+In de LV WOZ is ook de relatie vastgelegd met het/de verblijfsobject(en) uit de BAG. Als er meerdere verblijfsobjecten bij één WOZ-object horen, wordt de WOZ-waarde verdeeld op basis van de gebruiksoppervlakte uit de BAG. Als er meerdere WOZ-objecten bij één verblijfsobject horen, wordt de WOZ-waarde geaggregeerd.
+LET OP! De cijfers in deze tabel zijn niet goed te vergelijken met peiljaar 2018 en eerder. In de huidige tabel is gebruik gemaakt van de BAG woningvoorraad als populatie, terwijl in eerdere jaren de WOZ-woningpopulatie is gebruikt. De definitie van een woning in de WOZ net anders dan in de BAG, waardoor er (kleine) verschillen optreden; <a href='https://www.cbs.nl/nl-nl/longread/diversen/2021/verschillenanalyse-gemiddelde-woz-waarde-van-woningen'>verschillenanalyse gemiddelde WOZ-waarde van woningen</a>.
+
+De beschrijving van het onderzoek is te vinden bij: <a href='https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksbeschrijvingen/gemiddelde-woz-waarde-van-woningen'>Gemiddelde WOZ-waarde van woningen</a>.
+
+Overige informatie over de vastgoedstatistieken is te vinden bij: <a href='https://www.cbs.nl/nl-nl/deelnemers-enquetes/deelnemers-enquetes/decentrale-overheden/overzicht/vastgoed'>Vastgoed</a>.
+
+Meer informatie over gemeentelijke herindelingen: <a href='https://www.cbs.nl/nl-nl/onze-diensten/methoden/classificaties/overig/gemeentelijke-indelingen-per-jaar'>Gemeentelijke herindelingen</a>.
+
+De korte onderzoeksbeschrijving van het eigendom van de woningvoorraad is te vinden onder : <a href='https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksbeschrijvingen/eigendom-woningvoorraad'>eigendom</a>.
+
+
+5. MEER INFORMATIE
+
+<a href='https://www.cbs.nl/nl-nl/over-ons/contact/infoservice'>Infoservice</a>
+
+Copyright ¸ Centraal Bureau voor de Statistiek, Den Haag/Heerlen
+Verveelvoudiging is toegestaan, mits het CBS als bron wordt vermeld.
+
+
+"

@@ -1,0 +1,2 @@
+Identifier;MeasureGroupId;Index;Title;Description;DataType;Unit;Decimals;PresentationType
+M003039;;3;Gemiddelde WOZ-waarde van woningen;De gemiddelde WOZ-waarde in deze tabel is de gemiddelde WOZ-waarde van alle verblijfsobjecten met een woonfunctie. Woningen die een waarde hebben van minder dan 10 duizend euro of meer dan 5 miljoen euro niet meegenomen in het bepalen van het gemiddelde.;Double;1 000 euro;0;Relative

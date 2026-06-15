@@ -1,0 +1,12 @@
+Identifier;DimensionGroupId;DimensionId;Index;Title;Description
+T001132;;Eigendom;1;Totaal;"Woning; de kleinste binnen één of meer panden gelegen en voor woondoeleinden geschikte eenheid van gebruik, ontsloten via een eigen toegang vanaf de openbare weg, een erf of een gedeelde verkeersruimte.
+Voorbeelden zijn vrijstaande woningen, eengezinswoningen, flat- of portiekwoningen, studentenhuizen.
+Alle verblijfsobjecten in de Basisregistratie Adressen en Gebouwen (BAG)met minimaal een woonfunctie en eventueel een of meer andere gebruiksfuncties worden als woning aangemerkt."
+1014800;;Eigendom;2;Koopwoningen;Woningen die eigendom zijn van de (toekomstige) bewoner(s) of in gebruik als tweede woning.
+A047047;;Eigendom;3;Huurwoning in bezit woningcorporatie;"Huurwoningen in eigendom van 'toegelaten instellingen volkshuisvesting'. Het betreft het aantal huurwoningen waarvan is vastgesteld dat de eigenaar een toegelaten instelling is. Het betreft niet het aantal sociale huurwoningen, omdat er alleen is vastgesteld wie de eigenaar is en er niet is gekeken naar de hoogte van de huurprijs.
+Toegelaten instellingen: woningbouwvereniging, woningstichting, woningcorporatie. 
+Sociale huurwoningen: woningen met een huur onder de liberalisatiegrens."
+A047048;;Eigendom;4;Eigendom overige verhuurders;"Een huurwoning in eigendom van onder andere bedrijven, particulieren en institutionele beleggers. Huurwoningen waarvan het eigendom wel kon worden vastgesteld maar de eigenaar niet vallen hier ook onder. 
+Bedrijven: alle instellingen met een bedrijfsmatig karakter zoals bv's en nv's, zelfstandige ondernemers, makelaars en vastgoedhandelsmaatschappijen.
+Particulieren: alle natuurlijke personen.
+Institutionele beleggers: pensioenfondsen, beurs-, beleggings- en verzekeringsmaatschappijen."

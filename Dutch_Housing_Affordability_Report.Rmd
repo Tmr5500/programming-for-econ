@@ -1,0 +1,446 @@
+---
+title: "Assignment PfE"
+author: "Tutorial 1 Group 6"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r packages, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)
+library(sf)
+library(tmap)
+library(rnaturalearth)
+library(rmarkdown)
+library(yaml)
+library(tidyr)
+```
+
+# Title Page
+
+Housing Affordability in the Netherlands: Has Income Growth Kept Pace with Housing Value Growth? (2021–2024)
+
+Anissa Yabbata, Poshika Shiv Pillai, Achraf Aynao, Tahir Raja, Aditya Singh, Timo Crowther,
+
+Tutorial 1, Group 6
+
+Tutorial lecturer: Chantal Schouwenaar
+
+# Part 1 - Identify a Social Problem
+
+Housing affordability has become a major social and economic issue in the Netherlands in recent years. According to Statistics Netherlands (CBS), average housing values have increased substantially over the past decade, making it increasingly difficult for many households, particularly first-time buyers, to enter the housing market. At the same time, the European Central Bank (ECB) notes that inflationary pressures and subsequent increases in interest rates have affected housing market conditions across the Eurozone, including the Netherlands. Although household incomes have also risen, it remains unclear whether income growth has kept pace with increases in housing values. If housing values rise faster than incomes, home ownership becomes less affordable and households face greater financial pressure. This study examines whether income growth was sufficient to offset rising housing values across Dutch provinces between 2021 and 2024.
+
+Sources:
+- Statistics Netherlands (CBS). Housing stock; average value, ownership type, region.
+- European Central Bank (2022). ECB announces first interest rate increase in over a decade.
+
+## 1.1 Describe the Social Problem
+
+Previous research suggests that housing affordability depends on the relationship between housing costs and household income. When housing prices increase faster than incomes, households face greater difficulty purchasing homes and may be excluded from home ownership. Recent developments in the Dutch housing market have raised concerns that strong house price growth has outpaced improvements in household purchasing power. Examining both housing values and incomes is therefore necessary to assess whether affordability conditions have improved or worsen over time.
+
+Research Question: To what extent has income growth kept pace with housing value growth across Dutch provinces between 2021 and 2024?
+
+The objective of this study is to investigate whether increases in median disposable household income kept pace with growth in housing values across Dutch provinces between 2021 and 2024. By comparing housing values and incomes across regions and over time, the study evaluates changes in housing affordability during this period.
+
+This research contributes to the understanding of housing affordability in the Netherlands by examining the relationship between household income growth and housing value growth. The results provide insight into whether rising incomes were sufficient to keep up with increasing housing costs. In addition, comparing affordability across provinces helps identify regions where affordability pressures may be more severe.
+
+Hypothesis: Housing values increased faster than household incomes between 2021 and 2024, resulting in a decline in housing affordability across Dutch provinces.
+
+# Part 2 - Data Sourcing
+
+## 2.1 Load in the data
+
+```{r loading_data, include=FALSE}
+dataset <- read_delim(
+  "databases untouched/86161NED_UntypedDataSet_15062026_145351.csv",
+  delim = ";",
+  escape_double = FALSE,
+  trim_ws = TRUE
+)
+
+dataset2 <- read_delim(
+  "databases untouched/85036NED-202510290000/Observations.csv",
+  delim = ";",
+  escape_double = FALSE,
+  trim_ws = TRUE
+)
+```
+
+## 2.2 Provide a short summary of the dataset(s)
+
+```{r}
+head(dataset)
+head(dataset2)
+```
+
+This study uses two datasets obtained from Statistics Netherlands (CBS). The first dataset contains average housing values for Dutch provinces between 2021 and 2024, measured in thousands of euros. The second dataset contains median disposable household income for the same provinces and years, measured in thousands of euros per household. CBS datasets were selected because they provide official and nationally consistent measures for both income and housing values across all Dutch provinces.
+
+Both datasets cover the twelve Dutch provinces and were merged using province and year identifiers. The merged dataset contains 48 observations (12 provinces across 4 years) and includes variables on housing values, disposable income, and housing affordability.
+
+The main variable used in the analysis is the affordability ratio, calculated as:
+
+Affordability Ratio = Housing Value / Median Disposable Income
+
+A higher affordability ratio indicates that housing values are high relative to household income and therefore suggests lower housing affordability.
+
+One limitation of the data is that it is aggregated at the provincial level. As a result, differences between municipalities, neighbourhoods, and individual households are not captured. In addition, the datasets do not include factors such as mortgage costs, housing supply, or household wealth, which may also affect housing affordability.
+
+
+## 2.3 Describe the type of variables included
+
+The merged dataset contains both numerical and categorical variables that are used to analyse housing affordability across Dutch provinces. The main numerical variables are median disposable household income and average housing value, both measured annually for each province. These variables are continuous and allow comparisons of income levels and housing market conditions over time. The dataset also contains categorical variables such as the province code (RegioS) and the year (Perioden), which are used to identify observations and group the data by region and time period.
+
+In addition to the original variables, a new affordability ratio was created by dividing average housing value by median disposable income. This derived variable provides a clearer measure of housing affordability by relating housing prices directly to income levels. Higher values indicate that housing is relatively more expensive compared to household income, while lower values suggest greater affordability. Together, these variables make it possible to examine regional differences, temporal trends, and variations in housing affordability across the Netherlands.
+
+# Part 3 - Quantifying
+
+## 3.1 Data cleaning
+
+Several data preparation and cleaning steps were undertaken before the analysis. First, the housing value and household income datasets were imported from Statistics Netherlands (CBS) and inspected to identify relevant variables and observation units. Only variables required for the research question were retained, including province identifiers (RegioS), year identifiers (Perioden), housing values, and median disposable household income.
+
+The housing dataset was filtered to include only owner-occupied dwellings, as the study focuses on housing affordability from the perspective of potential homeowners. Both datasets were restricted to observations from 2021 to 2024 to ensure a consistent time period for comparison.
+
+Province identifiers were examined and standardised to ensure consistency across datasets. During the spatial analysis stage, overseas municipalities such as Saba and St. Eustatius were excluded because they are not part of the twelve Dutch provinces examined in this study and caused distortions in the geographic visualisations. Province names were also matched to geographic boundary files used for mapping.
+
+The datasets were then merged using province (RegioS) and year (Perioden) identifiers. After merging, the resulting dataset was checked for missing values, duplicate observations, and inconsistencies. Additional derived variables were subsequently created to support the analysis, including affordability ratios, income growth rates, housing value growth rates, and growth gaps.
+
+These cleaning and preparation steps ensured that the final dataset was consistent, comparable across provinces and years, and suitable for temporal, spatial, sub-population, and event-based analyses.
+
+These cleaning decisions improved consistency and comparability across datasets, allowing meaningful comparisons between provinces and years. Restricting the analysis to a common time period and standardising province identifiers reduced potential mismatches during the merging process.
+
+However, these choices also involve trade-offs. Limiting the data to 2021–2024 reduces the ability to analyse longer-term housing market trends, while focusing solely on owner-occupied dwellings excludes affordability conditions faced by renters. Therefore, the findings should be interpreted as reflecting affordability in the owner-occupied housing market rather than the Dutch housing sector as a whole.
+
+```{r data_cleaning, echo=FALSE, message=FALSE, warning=FALSE}
+housing_clean <- dataset2 %>%
+  filter(
+    Eigendom == "1014800",
+    grepl("^PV", RegioS),
+    Perioden %in% c("2021JJ00","2022JJ00","2023JJ00","2024JJ00")
+  ) %>%
+  select(RegioS, Perioden, Value)
+```
+
+```{r data_cleaning_income, echo=FALSE, message=FALSE, warning=FALSE}
+income_clean <- dataset %>%
+  filter(
+    KenmerkenVanHuishoudens == "1050010",
+    Populatie == 1050010
+  ) %>%
+  select(
+    RegioS,
+    Perioden,
+    MediaanBesteedbaarInkomen_6
+  )
+```
+
+```{r merge_data, echo=FALSE, message=FALSE, warning=FALSE}
+merged_data <- left_join(
+  housing_clean,
+  income_clean,
+  by = c("RegioS", "Perioden")
+)
+```
+
+## 3.2 Generate necessary variables
+
+Several derived variables were created from the merged dataset to measure housing affordability and analyse changes over time.
+
+Affordability Ratio: The primary variable used in this study is the affordability ratio, calculated as average housing value divided by median disposable household income. Higher values indicate that housing prices are high relative to incomes and therefore suggest lower housing affordability.
+
+Income Growth (%): Income growth was calculated as the percentage change in median disposable household income compared with the previous year. This variable captures changes in household purchasing power over time.
+
+Housing Value Growth (%): Housing value growth was calculated as the percentage change in average housing values relative to the previous year. This variable measures how rapidly housing prices changed over time.
+
+Growth Gap (%): The growth gap was calculated as the difference between housing value growth and income growth. Positive values indicate that housing prices increased faster than incomes, while negative values indicate that incomes grew faster than housing prices.
+
+These variables were created to examine housing affordability from different perspectives. While the affordability ratio provides a snapshot of affordability at a given point in time, the growth measures help identify whether affordability is improving or deteriorating over time. Together, these variables support the temporal, spatial, sub-population, and event-based analyses presented in this report.
+
+Affordability Ratio = Average Housing Value / Median Disposable Household Income
+
+Income Growth (%) = ((Income_t / Income_t-1) - 1) × 100
+
+Housing Value Growth (%) = ((Housing Value_t / Housing Value_t-1) - 1) × 100
+
+Growth Gap = Housing Value Growth - Income Growth
+
+```{r gen_var1, echo=FALSE, message=FALSE, warning=FALSE}
+
+merged_data <- merged_data %>%
+  group_by(RegioS) %>%
+  arrange(Perioden) %>%
+  mutate(
+    affordability_ratio =
+      Value / MediaanBesteedbaarInkomen_6,
+
+    income_growth =
+      (MediaanBesteedbaarInkomen_6 /
+       lag(MediaanBesteedbaarInkomen_6) - 1) * 100,
+
+    housing_growth =
+      (Value /
+       lag(Value) - 1) * 100,
+
+    growth_gap =
+      housing_growth - income_growth
+  )
+
+head(merged_data)
+
+```
+
+## 3.3 Visualize temporal variation
+
+```{r temporal_variation, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+
+temporal_data <- merged_data %>%
+  group_by(Perioden) %>%
+  summarise(
+    avg_income = mean(MediaanBesteedbaarInkomen_6, na.rm = TRUE),
+    avg_housing = mean(Value, na.rm = TRUE)
+  ) %>%
+  mutate(
+    Year = substr(Perioden, 1, 4)
+  )
+
+ggplot(temporal_data, aes(x = Year, group = 1)) +
+  geom_line(aes(y = avg_income, colour = "Income")) +
+  geom_point(aes(y = avg_income, colour = "Income")) +
+  geom_line(aes(y = avg_housing, colour = "Housing Value")) +
+  geom_point(aes(y = avg_housing, colour = "Housing Value")) +
+  labs(
+    title = "Average Income and Housing Values Across Dutch Provinces",
+    x = "Year",
+    y = "Average Income / Housing Value (thousand euros)",
+    colour = ""
+  ) +
+  theme_minimal()
+```
+
+Figure 1 illustrates changes in average housing values and median disposable household income across Dutch provinces between 2021 and 2024. Both variables increased during the study period; however, housing values grew considerably faster than incomes. Average housing values increased from approximately €317,000 in 2021 to €420,000 in 2024, while median disposable household income rose from around €40,000 to €48,000 over the same period. The largest increase in housing values occurred between 2022 and 2023, whereas income growth remained relatively gradual and stable.
+
+The widening gap between housing values and household incomes suggests that housing became less affordable over time. Since incomes did not increase at the same rate as housing prices, households would have needed a larger proportion of their income to purchase a home. These findings suggest that housing affordability may have deteriorated between 2021 and 2024, supporting the study's expectation that housing value growth outpaced income growth across Dutch provinces.
+
+## 3.4 Visualize spatial variation
+
+```{r province_affordability, echo=FALSE, message=FALSE, warning=FALSE}
+
+province_names <- c(
+  "PV20" = "Groningen",
+  "PV21" = "Friesland",
+  "PV22" = "Drenthe",
+  "PV23" = "Overijssel",
+  "PV24" = "Flevoland",
+  "PV25" = "Gelderland",
+  "PV26" = "Utrecht",
+  "PV27" = "Noord-Holland",
+  "PV28" = "Zuid-Holland",
+  "PV29" = "Zeeland",
+  "PV30" = "Noord-Brabant",
+  "PV31" = "Limburg"
+)
+
+province_affordability <- merged_data %>%
+  group_by(RegioS) %>%
+  summarise(
+    avg_affordability = mean(affordability_ratio, na.rm = TRUE)
+  ) %>%
+  mutate(
+    province = province_names[RegioS]
+  )
+```
+
+```{r province_affordability_map, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(sf)
+library(rnaturalearth)
+library(tmap)
+library(dplyr)
+
+# Match Friesland name with map data
+province_affordability <- province_affordability %>%
+  mutate(
+    province = ifelse(
+      province == "Fryslân",
+      "Friesland",
+      province
+    )
+  )
+
+# Dutch provinces
+nl <- ne_states(
+  country = "Netherlands",
+  returnclass = "sf"
+)
+
+# Remove Caribbean territories
+nl <- nl %>%
+  filter(
+    !name %in% c("Saba", "St. Eustatius")
+  )
+
+# Join affordability data to provinces
+province_map_data <- nl %>%
+  left_join(
+    province_affordability,
+    by = c("name" = "province")
+  )
+
+# Create choropleth map
+tm_shape(province_map_data) +
+  tm_polygons(
+    col = "avg_affordability",
+    title = "Affordability Ratio",
+    palette = "Blues",
+    colorNA = "grey90",
+    textNA = "Water body"
+  ) +
+  tm_borders() +
+  tm_layout(
+    main.title = "Housing Affordability Across Dutch Provinces",
+    main.title.size = 1.2,
+    legend.outside = TRUE
+  )
+```
+
+Figure 2 illustrates the spatial distribution of average housing affordability across the twelve Dutch provinces. Clear regional differences are visible. Noord-Holland records the highest affordability ratio (11.59), indicating that housing values are substantially higher relative to disposable household income and therefore less affordable. Utrecht (10.28), Zuid-Holland (9.66), and Noord-Brabant (9.66) also display relatively high ratios, suggesting stronger housing market pressure in these economically active regions. In contrast, Zeeland (7.05), Drenthe (7.28), and Friesland (7.50) show the lowest affordability ratios, indicating comparatively more affordable housing markets.
+
+Overall, the map reveals a concentration of lower affordability in the western and central parts of the Netherlands, particularly around the Randstad region, while more peripheral provinces tend to exhibit greater housing affordability. This pattern is consistent with expectations, as areas with higher population density and economic activity generally experience stronger demand for housing.
+
+A limitation of the spatial analysis is that the geographic boundary data obtained from Natural Earth included an additional polygon representing the IJsselmeer water body. Because this feature is not an administrative province and does not contain affordability data, it was displayed separately and excluded from the interpretation of provincial results. Despite this limitation, the map provides a useful overview of regional variation in housing affordability across the Netherlands.
+
+These findings support the hypothesis that housing affordability pressures are strongest in the more economically developed provinces, where housing values have increased more rapidly relative to household incomes.
+
+## 3.5 Visualize sub-population variation
+
+```{r visualise_subpopulations, echo=FALSE, message=FALSE, warning=FALSE}
+
+ownership_labels <- c(
+  "1014800" = "Owner-Occupied",
+  "A047047" = "Housing Corporation",
+  "A047048" = "Other Landlords",
+  "T001132" = "Total Stock"
+)
+
+ownership_summary <- dataset2 %>%
+  group_by(Eigendom) %>%
+  summarise(
+    avg_value = mean(Value, na.rm = TRUE)
+  ) %>%
+  mutate(
+    Eigendom = ownership_labels[Eigendom]
+  )
+
+ggplot(
+  ownership_summary,
+  aes(
+    x = reorder(Eigendom, avg_value),
+    y = avg_value
+  )
+) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Average Housing Value by Ownership Type",
+    x = "",
+    y = "Average Housing Value (EUR thousands)"
+  ) +
+  theme_minimal()
+
+```
+
+Figure 3 compares average housing values across different ownership categories in the Dutch housing market. Owner-occupied dwellings record the highest average housing value, at approximately €383,000, followed by the total housing stock average of around €328,000. Properties owned by other landlords have a lower average value of approximately €273,000, while housing corporation dwellings exhibit the lowest average value at around €206,000.
+
+The substantial differences between ownership categories indicate that housing market conditions vary considerably across housing segments. The higher values observed for owner-occupied dwellings suggest that households seeking to purchase a home face significantly higher costs than those residing in rental housing. In contrast, housing corporation properties, which largely represent the social housing sector, remain substantially more affordable and provide access to housing for lower-income households.
+
+These findings demonstrate that housing affordability is not experienced uniformly across the population. Affordability pressures are greatest within the owner-occupied market, where housing values are considerably higher than in other segments. As a result, rising house prices are likely to have a stronger impact on prospective homeowners than on households living in social housing. The variation across ownership types highlights the importance of considering sub-populations when evaluating housing affordability, as national averages may conceal important differences between housing market segments.
+
+## 3.6 Event analysis
+
+```{r Table, echo=FALSE, message=FALSE, warning=FALSE}
+event_data <- merged_data %>%
+  group_by(Perioden) %>%
+  summarise(
+    avg_affordability = mean(
+      affordability_ratio,
+      na.rm = TRUE
+    )
+  )
+
+event_data
+```
+
+```{r event_analysis, echo=FALSE, message=FALSE, warning=FALSE}
+
+event_data <- merged_data %>%
+  group_by(Perioden) %>%
+  summarise(
+    avg_affordability = mean(
+      affordability_ratio,
+      na.rm = TRUE
+    )
+  ) %>%
+  mutate(
+    Year = c(2021, 2022, 2023, 2024)
+  )
+
+ggplot(
+  event_data,
+  aes(
+    x = Year,
+    y = avg_affordability,
+    group = 1
+  )
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 3) +
+  geom_vline(
+    xintercept = 2022,
+    linetype = "dashed"
+  ) +
+  labs(
+    title = "Housing Affordability Before and After ECB Rate Hikes",
+    subtitle = "Dashed line indicates the beginning of ECB monetary tightening in 2022",
+    x = "Year",
+    y = "Average Affordability Ratio"
+  ) +
+  theme_minimal()
+
+```
+Figure 4 examines housing affordability before and after the European Central Bank (ECB) began its monetary tightening cycle in 2022. The affordability ratio increased from 8.01 in 2021 to 8.38 in 2022 and rose further to 9.07 in 2023. Although the ratio declined slightly to 8.84 in 2024, it remained above its pre-tightening level. Since higher affordability ratios indicate that housing values are high relative to disposable household income, these results suggest that housing affordability deteriorated during this period.
+
+The timing of these changes coincides with the ECB's interest rate increases, which were introduced in response to elevated inflation across the Eurozone. While higher interest rates are generally expected to reduce housing demand and slow house price growth, the results indicate that affordability pressures remained substantial in the Netherlands during the years immediately following the policy change. This suggests that increases in household income were insufficient to fully offset rising housing costs.
+
+However, the analysis should be interpreted with caution. The observed trend cannot be attributed solely to ECB policy, as housing affordability is influenced by multiple factors, including housing supply constraints, demographic changes, inflation, and broader economic conditions. Nevertheless, the figure provides evidence that affordability remained under pressure throughout the period of monetary tightening, with only limited improvement visible by 2024.
+
+Overall, the event analysis supports the broader findings of this study that housing values increased more rapidly than household incomes between 2021 and 2024, contributing to a decline in housing affordability across the Netherlands.
+
+# Part 4 - Discussion
+
+## 4.1 Discuss your findings
+
+The findings suggest that income growth did not fully keep pace with housing value growth across Dutch provinces between 2021 and 2024. Although median disposable household incomes increased throughout the study period, housing values generally rose at a faster rate, leading to lower housing affordability. This pattern was particularly evident between 2022 and 2023, when affordability ratios reached their highest levels.
+
+Regional differences were also evident. Provinces within the Randstad region, particularly Noord-Holland, Utrecht, and Zuid-Holland, displayed higher affordability ratios than more peripheral provinces such as Zeeland, Drenthe, and Friesland. In addition, owner-occupied dwellings had substantially higher average housing values than other housing categories, indicating greater affordability challenges for prospective homeowners. Affordability pressures also remained elevated during the period surrounding the ECB's monetary tightening cycle, although these changes cannot be attributed solely to monetary policy.
+
+Taken together, the results suggest that rising household incomes were insufficient to offset increases in housing values, resulting in declining affordability across many Dutch provinces.
+
+Several limitations should be considered when interpreting the results. First, the analysis uses aggregated provincial-level data, which may conceal important differences within provinces. Housing affordability can vary substantially between municipalities, neighbourhoods, and individual households. Second, the study covers only the period 2021–2024, providing a relatively short-term perspective on housing market developments. A longer time series could provide a more comprehensive understanding of affordability trends and housing market cycles. Third, the affordability ratio is based solely on housing values and household income and does not account for factors such as mortgage interest rates, housing supply constraints, household wealth, or demographic characteristics. Finally, the spatial analysis highlighted the importance of carefully evaluating geographic boundary data, as an additional IJsselmeer water-body polygon required further inspection before the provincial results could be interpreted.
+
+Despite these limitations, the findings have several policy implications. The results suggest that increases in household income alone may not be sufficient to improve housing affordability when housing values continue to rise rapidly. Policymakers may therefore need to consider measures that address housing supply constraints, particularly in high-demand regions where affordability pressures appear most severe. In addition, the differences observed across provinces and housing market segments indicate that housing affordability challenges are not experienced uniformly across the population, highlighting the importance of considering both regional and housing-market characteristics when designing policy responses.
+
+# Part 5 - Reproducibility
+
+## 5.1 Github repository link
+
+https://github.com/Tmr5500/programming-for-econ.git 
+
+## 5.2 Reference list
+
+## References
+
+Centraal Bureau voor de Statistiek. (2026). *Income of private households; household characteristics, region*. CBS Open Data. https://opendata.cbs.nl/#/CBS/nl/dataset/86161NED/table
+
+Centraal Bureau voor de Statistiek. (2026). *Housing stock; average value, ownership type, region*. CBS StatLine. https://www.cbs.nl/nl-nl/cijfers/detail/85036NED
+
+European Central Bank. (2022). *ECB announces first interest rate increase in over a decade*. European Central Bank. https://www.ecb.europa.eu/press/pr/date/2022/html/ecb.mp220721~53e5bdd317.en.html
